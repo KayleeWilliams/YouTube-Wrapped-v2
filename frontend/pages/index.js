@@ -1,8 +1,33 @@
 import Head from 'next/head'
 import Link from 'next/Link'
+import {useRouter} from 'next/router'
+import React, { useState } from 'react'
+import axios from 'axios'
 import IcBaselineArrowCircleDown from '~icons/ic/baseline-arrow-circle-down'
 
 export default function Home() {
+
+  const router = useRouter()
+  let file = null;
+
+  function handleFile(event) {
+    event.preventDefault();
+    file = event.target.files[0]
+  }
+
+  function handleSubmit() {
+    if (file != null) {    
+      let formData = new FormData();
+      formData.append('file', file);
+      axios.post('http://localhost:5000/uploader', formData,
+      ).then(response => { 
+        // router.push({pathname: 'result', query: response.data})
+        let data = response.data
+        router.push({pathname: 'result', query: {minsWatched: data[0], videosWatched: data[1], channels: data[2], searches: data[3], comments: data[4], liked: data[5], image: data[6]}})
+    });
+    }
+  }
+  
   return (
     <div className="w-screen h-screen bg-background font-sans">
       <Head>
@@ -39,6 +64,10 @@ export default function Home() {
 
         <div className="snap-center snap-normal flex flex-col h-full content-center justify-center items-center gap-y-12" id="upload"> 
           <h2 className="text-2xl font-bold">Upload your data</h2>
+          <form onSubmit={handleSubmit}>
+            <input type="file" onChange={handleFile}/>
+            <input type="submit" value="Upload File" />
+          </form>
         </div>
       </main>
 

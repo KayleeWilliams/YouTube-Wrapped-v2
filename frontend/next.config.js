@@ -12,6 +12,9 @@ const nextConfig = {
 
     return config
   },
+  images: {
+    domains: ['yt3.ggpht.com'],
+  },
 }
 
 module.exports = nextConfig

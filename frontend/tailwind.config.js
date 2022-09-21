@@ -11,9 +11,6 @@ module.exports = {
         link: '#D282A6',
         on: '#F58D9B',
       },
-      // fontFamily: {
-      //   'custom': ['Roboto', 'Open Sans', 'Arial'],
-      // },
     },
   },
   plugins: [],
