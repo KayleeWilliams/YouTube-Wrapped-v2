@@ -42,9 +42,9 @@ export default function Home() {
           <Link href="#how" scroll={true} replace><IcBaselineArrowCircleDown className="text-link hover:text-on w-16 h-16 animate-bounce transition ease-in-out delay-100 duration-300"/></Link>
         </div>
 
-        <div className="snap-center snap-normal flex flex-col h-full content-center justify-center items-center gap-y-6 lg:gap-y-12" id="how"> 
-          <h2 className="text-2xl font-bold">How to download your data</h2>
-          <ol className="px-8 text-sm lg:px-0 lg:text-base list-decimal text-left">
+        <div className="snap-center snap-normal flex flex-col h-full content-center justify-center items-center gap-y-6 sm:gap-y-4 md:gap-y-6 lg:gap-y-12" id="how"> 
+          <h2 className="text-2xl sm:text-2xl md:text-3xl font-bold">How to download your data</h2>
+          <ol className="px-8 text-sm sm:text-xs md:px-0 md:text-base lg:px-0  list-decimal text-left">
             <li>Head to <a className="text-link hover:text-on underline transistion duration-300 ease-in-out" target="_blank" href="https://takeout.google.com">Google Takeout</a> and sign in</li>
             <li>Select "YouTube and YouTube Music" </li>
             <li>Hit next step and configure your preferences </li>
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
 
         <div className="snap-center snap-normal flex flex-col h-full content-center justify-center items-center gap-y-12" id="upload"> 
-          <h2 className="text-2xl font-bold">Upload your data</h2>
+          <h2 className="text-2xl md:text-3xl font-bold">Upload your data</h2>
           <form  className="flex flex-col gap-y-4 " onSubmit={handleSubmit}>
             <input type="file" id="file" accept=".zip" onChange={handleFile} hidden/>
             <label className="bg-link py-4 px-8 rounded-full hover:bg-on transition ease-in-out delay-100 duration-300" htmlFor="file">Select File</label>
