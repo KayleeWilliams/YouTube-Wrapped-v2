@@ -3,7 +3,7 @@ import Link from 'next/Link'
 import {useRouter} from 'next/router'
 import React, { useState } from 'react'
 import axios from 'axios'
-import IcBaselineArrowCircleDown from '~icons/ic/baseline-arrow-circle-down'
+import IcBaselineArrowCircleDown from '~icons/ic/baseline-arrow-circle-down.jsx'
 
 export default function Home() {
 
@@ -38,13 +38,13 @@ export default function Home() {
 
       <main className="snap-y snap-mandatory scroll-smooth overflow-y-scroll text-white content-center justify-center text-center h-screen">
         <div className="snap-center snap-normal flex flex-col w-full h-full justify-center content-center items-center gap-y-16"> 
-          <h1 className="text-9xl font-bold">YouTube<br />Wrapped</h1>
-          <Link href="#how" scroll={true} replace><IcBaselineArrowCircleDown className="text-link hover:text-on w-16 h-16 animate-bounce"/></Link>
+          <h1 className="text-7xl lg:text-9xl font-bold">YouTube<br />Wrapped</h1>
+          <Link href="#how" scroll={true} replace><IcBaselineArrowCircleDown className="text-link hover:text-on w-16 h-16 animate-bounce transition ease-in-out delay-100 duration-300"/></Link>
         </div>
 
-        <div className="snap-center snap-normal flex flex-col h-full content-center justify-center items-center gap-y-12" id="how"> 
+        <div className="snap-center snap-normal flex flex-col h-full content-center justify-center items-center gap-y-6 lg:gap-y-12" id="how"> 
           <h2 className="text-2xl font-bold">How to download your data</h2>
-          <ol className="list-decimal text-left">
+          <ol className="px-8 text-sm lg:px-0 lg:text-base list-decimal text-left">
             <li>Head to <a className="text-link hover:text-on underline transistion duration-300 ease-in-out" target="_blank" href="https://takeout.google.com">Google Takeout</a> and sign in</li>
             <li>Select "YouTube and YouTube Music" </li>
             <li>Hit next step and configure your preferences </li>
