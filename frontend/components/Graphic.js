@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function Graphic({data, primary, secondary}) {
+export default function Graphic({data, colour}) {
 
     // Loop through top channels array
     let channels = data.channels
@@ -12,21 +12,21 @@ export default function Graphic({data, primary, secondary}) {
     }
 
     return (
-        <div className={`flex flex-col w-screen md:w-max ${primary}`}>
+        <div className={`flex flex-col w-screen md:w-max primary`}>
 
             {/* Top Bar */}
-            <div className={`flex flex-row w-full h-12 px-6 items-center justify-between text-base md:text-2xl ${secondary}`}> 
-                <div className={`w-4 h-4 md:w-6 md:h-6 rounded-full ${primary}`} />
-                <div className={`w-4 h-4 md:w-6 md:h-6 rounded-full invisible md:visible ${primary}`} />
-                <div className={`w-4 h-4 md:w-6 md:h-6 rounded-full ${primary}`} />
-                <div className={`w-4 h-4 md:w-6 md:h-6 rounded-full invisible  md:visible ${primary}`} />
-                <div className={`w-4 h-4 md:w-6 md:h-6 rounded-full ${primary}`} />
+            <div className={`flex flex-row w-full h-12 px-6 items-center justify-between text-base md:text-2xl secondary`}> 
+                <div className={`primary w-4 h-4 md:w-6 md:h-6 rounded-full`} />
+                <div className={`primary w-4 h-4 md:w-6 md:h-6 rounded-full invisible md:visible`} />
+                <div className={`primary w-4 h-4 md:w-6 md:h-6 rounded-full`} />
+                <div className={`primary w-4 h-4 md:w-6 md:h-6 rounded-full invisible  md:visible`} />
+                <div className={`primary w-4 h-4 md:w-6 md:h-6 rounded-full`} />
                 <h1 className="font-bold text-right">YouTube Wrapped</h1>
             </div>
 
             {/* Top Section Content */}
             <div className="flex flex-row w-max mt-6 mx-8 gap-6 md:gap-12 items-center">
-                <div className="relative w-40 h-40 md:w-64 md:h-64 drop-shadow-xl"><Image src={data.image} layout="fill" /></div>
+                <div className="relative w-40 h-40 md:w-64 md:h-64 drop-shadow-xl"><Image src={data.image} layout="fill" priority/></div>
                 <div className="flex flex-col gap-8 text-lg md:text-3xl">
                     <p> Videos Watched <br/> <span className="font-bold text-2xl md:text-4xl"> { data.videosWatched } </span></p>
                     <p> Minutes Watched <br/> <span className="font-bold text-2xl md:text-4xl"> { data.minsWatched } </span></p>
@@ -45,7 +45,18 @@ export default function Graphic({data, primary, secondary}) {
                 <p> Videos Liked <br/><span className="text-lg md:text-3xl font-normal"> { data.liked } </span></p>
                 <p> Total Searches <br/><span className="text-lg md:text-3xl font-normal"> { data.searches } </span></p>
             </div>
-            </div>
-        </div>
+         </div>
+        <style jsx>{`
+        .primary {
+            background-color: ${colour[0]};
+            color: ${colour[1]};
+        }
+
+        .secondary {
+            background-color: ${colour[1]};
+            color: ${colour[0]};
+        }
+        `}</style>
+    </div>
     )
 }

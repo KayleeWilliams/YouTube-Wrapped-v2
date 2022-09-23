@@ -6,10 +6,9 @@ const nextConfig = {
     config.plugins.push(
       require('unplugin-icons/webpack')({
         compiler: 'jsx',
-        jsx: 'react',
+        jsx: 'react', 
       }),
     )
-
     return config
   },
   images: {
