@@ -49,33 +49,53 @@ export default function Result({data}) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div id="1" className="flex flex-shrink-0 snap-start snap-normal flex-col items-center justify-center content-center lg:flex-row w-screen h-screen lg:h-full"> 
-				<div className="flex flex-col gap-4 md:mr-4"> 
-					<Picker color={color} picker="setPicker1"/>
-					<Picker color={color} picker="setPicker2"/>
+			<div id="1" className="flex flex-shrink-0 snap-start snap-normal flex-col items-center justify-start md:justify-center content-center lg:flex-row w-screen h-screen lg:h-full"> 
+			{/* <div id="2" className="flex flex-shrink-0 snap-start snap-normal flex-col items-center justify-start md:justify-center content-center lg:flex-row w-screen h-screen lg:h-full">  */}
+
+				<div className="flex flex-row gap-4 lg:flex-col my-4 lg:my-0 lg:mr-4"> 
+					<Picker color={color} picker="setPicker1" displayColor={colorPicker1}/>
+					<Picker color={color} picker="setPicker2" displayColor={colorPicker2}/>
 				</div>
 				<Graphic colour={[colorPicker1, colorPicker2]} data={data} /> 
 				<div className="flex flex-row w-full lg:w-fit justify-center"> 
-					<Link href="#2" scroll={true} replace><IcBaselineArrowRight className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-32 h-32 lg:w-64 lg:h-64" /></Link>
+					<Link href="#2" scroll={true} replace><IcBaselineArrowRight className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-32 h-32 lg:w-48 lg:h-48" /></Link>
 				</div>			
 			</div>          
 
-			<div id="2" className="flex flex-shrink-0 snap-start snap-normal flex-col items-center lg:flex-row ontent-center justify-center w-screen h-screen"> 
-				<Link href="#1" scroll={true} replace><IcBaselineArrowLeft className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-0 h-0 lg:w-64 lg:h-64 invisible lg:visible" /></Link>
+			<div id="2" className="flex flex-shrink-0 snap-start snap-normal flex-col items-center justify-start md:justify-center content-center lg:flex-row w-screen h-screen lg:h-full"> 
+				<Link href="#1" scroll={true} replace><IcBaselineArrowLeft className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-0 h-0 md:h-8 lg:w-48 lg:h-48 invisible lg:visible mt-16 lg:mt-0" /></Link>
 				<Graphic colour={['#c5e6fb', '#6e34c5']} data={data} />     
 				<div className="flex flex-row w-full lg:w-fit justify-center"> 
 					<Link href="#1" scroll={true} replace><IcBaselineArrowLeft className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-32 h-32 lg:w-0 lg:h-0 visible lg:invisible" /></Link>
-					<Link href="#3" scroll={true} replace><IcBaselineArrowRight className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-32 h-32 lg:w-64 lg:h-64" /></Link>
+					<Link href="#3" scroll={true} replace><IcBaselineArrowRight className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-32 h-32 lg:w-48 lg:h-48" /></Link>
 				</div>
 			</div>      
 
-			<div id="3" className="flex flex-shrink-0 snap-start snap-normal flex-col items-center lg:flex-row  content-center justify-center w-screen h-screen"> 
-				<Link href="#2" scroll={true} replace><IcBaselineArrowLeft className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-0 h-0 lg:w-64 lg:h-64 invisible lg:visible" /></Link>
-				<Graphic colour={['#37367b', '#9ef990']} data={data} />     		
+			<div id="3" className="flex flex-shrink-0 snap-start snap-normal flex-col items-center justify-start md:justify-center content-center lg:flex-row w-screen h-screen lg:h-full"> 
+				<Link href="#2" scroll={true} replace><IcBaselineArrowLeft className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-0 h-0 md:h-8 lg:w-48 lg:h-48 invisible lg:visible mt-16 lg:mt-0" /></Link>
+				<Graphic colour={['#931f57', '#f1d625']} data={data} />     
 				<div className="flex flex-row w-full lg:w-fit justify-center"> 
-					<Link href="#2" scroll={true} replace><IcBaselineArrowLeft className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-32 h-32 lg:w-0 lg:h-0" /></Link>
+					<Link href="#2" scroll={true} replace><IcBaselineArrowLeft className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-32 h-32 lg:w-0 lg:h-0 visible lg:invisible" /></Link>
+					<Link href="#4" scroll={true} replace><IcBaselineArrowRight className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-32 h-32 lg:w-48 lg:h-48" /></Link>
+				</div>
+			</div>  
+
+			<div id="4" className="flex flex-shrink-0 snap-start snap-normal flex-col items-center justify-start md:justify-center content-center lg:flex-row w-screen h-screen lg:h-full"> 
+				<Link href="#3" scroll={true} replace><IcBaselineArrowLeft className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-0 h-0 md:h-8 lg:w-48 lg:h-48 invisible lg:visible mt-16 lg:mt-0" /></Link>
+				<Graphic colour={['#583987', '#bf87d1']} data={data} />     
+				<div className="flex flex-row w-full lg:w-fit justify-center"> 
+					<Link href="#3" scroll={true} replace><IcBaselineArrowLeft className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-32 h-32 lg:w-0 lg:h-0 visible lg:invisible" /></Link>
+					<Link href="#5" scroll={true} replace><IcBaselineArrowRight className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-32 h-32 lg:w-48 lg:h-48" /></Link>
 				</div>
 			</div>       
+
+			<div id="5" className="flex flex-shrink-0 snap-start snap-normal flex-col items-center justify-start md:justify-center content-center lg:flex-row w-screen h-screen lg:h-full"> 
+				<Link href="#4" scroll={true} replace><IcBaselineArrowLeft className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-0 h-0 md:h-8 lg:w-48 lg:h-48 invisible lg:visible mt-16 lg:mt-0" /></Link>
+				<Graphic colour={['#f4db6b', '#304073']} data={data} />     
+				<div className="flex flex-row w-full lg:w-fit justify-center"> 
+					<Link href="#4" scroll={true} replace><IcBaselineArrowLeft className="flex-shrink-0 text-link hover:text-on transition ease-in-out delay-150 duration-[400ms] hover:-translate-y-1 hover:scale-150 w-32 h-32 lg:w-0 lg:h-0 visible lg:invisible" /></Link>
+				</div>
+			</div>
 		</div>
 	)
 }

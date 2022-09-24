@@ -2,10 +2,10 @@ import { MaterialPicker, SketchPicker, ChromePicker } from 'react-color'
 import { useState, useEffect } from 'react'
 
 
-export default function Picker({color, picker}) {
+export default function Picker({color, picker, displayColor}) {
     // Create random Hex
     const randomColor = Math.floor(Math.random()*16777215).toString(16).padEnd(6, '0');   
-    
+
     const [displayColorPicker, setDisplay] = useState(false);
     const [hexColor, setHexColor] = useState(`#${randomColor}`)
 
@@ -27,7 +27,7 @@ export default function Picker({color, picker}) {
 
     return(
         <div>
-            <div className="w-16 h-16 custom-color" onClick={ handleClick }>
+            <div className="w-8 h-8 md:w-16 md:h-16 custom-color" onClick={ handleClick }>
             {/* <div className="w-full h-full" style={styles.custom}> */}
             {/* </div> */}
             </div>
@@ -38,7 +38,7 @@ export default function Picker({color, picker}) {
 
             <style jsx>{`
                 .custom-color {
-                    background-color: ${hexColor};
+                    background-color: ${displayColor};
                 }
             `}</style>
       </div>
