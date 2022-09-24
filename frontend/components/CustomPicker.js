@@ -23,7 +23,7 @@ export default function Picker({color, picker, displayColor}) {
 
     useEffect(() => {
         color([hexColor, picker]);
-    }, [setHexColor]);
+    }, [hexColor]);
 
     return(
         <div>
