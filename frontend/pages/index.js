@@ -13,6 +13,9 @@ export default function Home() {
   // Error Message
   const [isVisible, setIsVisible] = useState(false);
 
+  // If uploading/loading
+  const [isLoading, setIsLoading] = useState(false);
+
 
   function handleFile(event) {
     event.preventDefault();
@@ -24,6 +27,7 @@ export default function Home() {
 
     if (file != null) {    
       setIsVisible(false)
+      setIsLoading(true)
 
       let formData = new FormData();
       formData.append('file', file);
@@ -34,10 +38,13 @@ export default function Home() {
         }
       }).then(response => { 
         let data = response.data
+        file = null;
         router.push({pathname: 'result', query: {minsWatched: data[0], videosWatched: data[1], channels: data[2], searches: data[3], comments: data[4], liked: data[5], image: data[6]}})
        }).catch(error => {
        if (error.response.status == 400) {
+          file = null;
           setIsVisible(true)
+          setIsLoading(false)
         }
     });
     }
@@ -82,29 +89,18 @@ export default function Home() {
           <h2 className="text-2xl md:text-3xl font-bold">Upload your data</h2>
             {isVisible && <div className="bg-[#7A3897] p-5 rounded-lg">
             <h1 className="font-bold font-2xl text-left">An error occurred</h1>
-            <p>Please ensure you uploaded the correct file.</p>
+            <p className="text-xs md:text-base">Please ensure you uploaded the correct file.</p>
             </div>}
           <form  className="flex flex-col gap-y-4 " onSubmit={handleSubmit}>
             <input type="file" id="file" accept=".zip" onChange={handleFile} hidden/>
             <label className="bg-link py-4 px-8 rounded-full hover:bg-on transition ease-in-out delay-100 duration-300" htmlFor="file">Select File</label>
-            <input className="bg-link py-4 px-8 rounded-full hover:bg-on transition ease-in-out delay-100 duration-300" type="submit" value="Upload File" />
+            <div className="bg-link py-4 px-8 rounded-full hover:bg-on transition ease-in-out delay-100 duration-300 flex flex-row gap-2">
+            {isLoading && <div className="rounded-full border-violet-100 border-t-violet-100/0 w-6 h-6 border-4 border-solid animate-spin" />}
+             <input type="submit" value="Upload File" /></div>
           </form>
   
         </div>
       </main>
-
-      <footer className="">
-        {/* <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className="">
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a> */}
-      </footer>
     </div>
   )
 }
