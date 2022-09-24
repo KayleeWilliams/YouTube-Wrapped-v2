@@ -10,20 +10,35 @@ export default function Home() {
   const router = useRouter()
   let file = null;
 
+  // Error Message
+  const [isVisible, setIsVisible] = useState(false);
+
+
   function handleFile(event) {
     event.preventDefault();
     file = event.target.files[0]
   }
 
-  function handleSubmit() {
+  function handleSubmit(event) {
+    event.preventDefault();
+
     if (file != null) {    
+      setIsVisible(false)
+
       let formData = new FormData();
       formData.append('file', file);
-      axios.post('http://localhost:5000/uploader', formData,
-      ).then(response => { 
-        // router.push({pathname: 'result', query: response.data})
+
+      axios.post('http://192.168.1.229:5000/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(response => { 
         let data = response.data
         router.push({pathname: 'result', query: {minsWatched: data[0], videosWatched: data[1], channels: data[2], searches: data[3], comments: data[4], liked: data[5], image: data[6]}})
+       }).catch(error => {
+       if (error.response.status == 400) {
+          setIsVisible(true)
+        }
     });
     }
   }
@@ -65,11 +80,16 @@ export default function Home() {
 
         <div className="snap-center snap-normal flex flex-col h-full content-center justify-center items-center gap-y-12" id="upload"> 
           <h2 className="text-2xl md:text-3xl font-bold">Upload your data</h2>
+            {isVisible && <div className="bg-[#7A3897] p-5 rounded-lg">
+            <h1 className="font-bold font-2xl text-left">An error occurred</h1>
+            <p>Please ensure you uploaded the correct file.</p>
+            </div>}
           <form  className="flex flex-col gap-y-4 " onSubmit={handleSubmit}>
             <input type="file" id="file" accept=".zip" onChange={handleFile} hidden/>
             <label className="bg-link py-4 px-8 rounded-full hover:bg-on transition ease-in-out delay-100 duration-300" htmlFor="file">Select File</label>
             <input className="bg-link py-4 px-8 rounded-full hover:bg-on transition ease-in-out delay-100 duration-300" type="submit" value="Upload File" />
           </form>
+  
         </div>
       </main>
 

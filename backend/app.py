@@ -1,63 +1,53 @@
-#import dataexplorer
-import os
-from shutil import rmtree
-
-import zipfile
-from flask import Flask, jsonify, request
-from flask_cors import CORS, cross_origin
+from flask import Flask, request, jsonify, abort
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
-from random import randint
-import main
+from pathlib import Path
+from zipfile import ZipFile
+from shutil import rmtree
+from main import main
+import os
+
 
 app = Flask(__name__)
+CORS(app)
 
-# Set folder to store files in
-UPLOAD_FOLDER = os.getcwd() + '/temp/'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER'] = os.getcwd() + '/temp/'
 
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-@app.route('/uploader', methods=['GET', 'POST'])
-@cross_origin(origin='*', headers=['Content-Type', 'Authorization'])
-def upload_file():
+@app.route('/')
+def home():
+    return 'Hi'
+
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    Path(os.getcwd() + '/temp/').mkdir(parents=True, exist_ok=True)
+
     if request.method == 'POST':
-        temp_path = os.path.join(app.config['UPLOAD_FOLDER'])
-
         f = request.files['file']
-        filename = secure_filename(f.filename) 
+        filename = secure_filename(f.filename)
 
-        # Make temp folder 
-        folder = randint(0,1000)
-        if os.path.exists(os.path.join(temp_path, str(folder))):
-            folder += randint(1000,2000)
-            os.mkdir(os.path.join(temp_path, str(folder)))
-        else:
-            os.mkdir(os.path.join(temp_path, str(folder)))
+        try:
+            # Save the Zipfile
+            zip_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            f.save(zip_path)
 
-        # Save Zipfile in temp folder
-        zip_path = os.path.join(app.config['UPLOAD_FOLDER'], str(folder), filename)
-        f.save(zip_path)
-        print("Flask: File Saved")
+            # Unzip the file
+            with ZipFile(zip_path, 'r') as zip_ref:
+                zip_ref.extractall(app.config['UPLOAD_FOLDER'])
 
-        # Unzip file
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall(os.path.join(
-                app.config['UPLOAD_FOLDER'], str(folder)))
-        print("Flask: File Unzipped")
+            # Get the data
+            result = main(os.path.join(
+                app.config['UPLOAD_FOLDER'], filename[:-4]))
 
-        result = main.main(os.path.join(app.config['UPLOAD_FOLDER'], str(folder), filename[:-4]))
-        
-        #  Delete Data
-        rmtree(os.path.join(app.config['UPLOAD_FOLDER'], str(folder)))
+            # Delete the file
+            rmtree(app.config['UPLOAD_FOLDER'])
 
-        return jsonify(result)
-
-
-@app.after_request
-def after_request(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    return response
+            return jsonify(result)
+        except:
+            rmtree(app.config['UPLOAD_FOLDER'])
+            abort(400)
 
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=5000, debug=True)
+    app.run(host='192.168.1.229', port=5000, debug=True)
