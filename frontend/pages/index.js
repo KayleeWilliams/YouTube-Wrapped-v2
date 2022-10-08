@@ -3,7 +3,7 @@ import Head from 'next/head'
 import {useRouter} from 'next/router'
 import React, { useState } from 'react'
 import axios from 'axios'
-import IcBaselineArrowCircleDown from '~icons/ic/baseline-arrow-circle-down.jsx'
+import IcBaselineArrowCircleDown from '~icons/ic/baseline-arrow-circle-down'
 
 export default function Home() {
 
